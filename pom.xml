@@ -81,7 +81,7 @@
                 <version>3.4.0</version>
                 <configuration>
                     <from>
-                        <image>openjdk:21-jre-slim</image>
+                        <image>eclipse-temurin:21-jre</image>
                     </from>
                     <to>
                         <image>subhankarm2312/ts-domain-config-service</image>

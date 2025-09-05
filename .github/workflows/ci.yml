@@ -43,7 +43,6 @@ jobs:
           IMAGE_NAME="${{ env.DOCKERHUB_USERNAME }}/${{ env.SERVICE_NAME }}"
           IMAGE_TAG="${{ steps.generate_tag.outputs.tag }}"
           mvn compile com.google.cloud.tools:jib-maven-plugin:build -Dimage="${IMAGE_NAME}:${IMAGE_TAG}"
-        working-directory: .
 
   deploy:
     needs: build-and-push
