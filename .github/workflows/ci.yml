@@ -43,7 +43,7 @@ jobs:
           IMAGE_NAME="${{ env.DOCKERHUB_USERNAME }}/${{ env.SERVICE_NAME }}"
           IMAGE_TAG="${{ steps.generate_tag.outputs.tag }}"
           mvn compile com.google.cloud.tools:jib-maven-plugin:build -Dimage="${IMAGE_NAME}:${IMAGE_TAG}"
-        working-directory: ./server/domain-config-service
+        working-directory: .
 
   deploy:
     needs: build-and-push
@@ -64,7 +64,7 @@ jobs:
       - name: Deploy to Kubernetes using Kustomize
         run: |
           IMAGE_TAG="${{ needs.build-and-push.outputs.tag }}"
-          cd server/domain-config-service/k8s
+          cd k8s
           
           # Use kustomize to set the new image tag dynamically
           kustomize edit set image subhankarm2312/ts-domain-config-service:${IMAGE_TAG}
