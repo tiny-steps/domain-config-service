@@ -76,27 +76,10 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.4.0</version>
-                <configuration>
-                    <from>
-                        <image>openjdk:21-jre-slim</image>
-                    </from>
-                    <to>
-                        <image>subhankarm2312/ts-domain-config-service</image>
-                    </to>
-                    <container>
-                        <ports>
-                            <port>8090</port>
-                        </ports>
-                        <environment>
-                            <SPRING_PROFILES_ACTIVE>prod</SPRING_PROFILES_ACTIVE>
-                        </environment>
-                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-                    </container>
-                </configuration>
-            </plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.6</version>
+			</plugin>
         </plugins>
     </build>
 </project>
