@@ -22,6 +22,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+<<<<<<< HEAD
 
 #intellij
 *.iws
@@ -39,3 +40,5 @@ replay_pid*
 # maven
 /target
 
+=======
+>>>>>>> 74d2f8504a5d676e6dc1cd25559a77338b76428d
