@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-domain-config-service-deployment
+  labels:
+    app: ts-domain-config-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ts-domain-config-service
+  template:
+    metadata:
+      labels:
+        app: ts-domain-config-service
+    spec:
+      containers:
+        - name: ts-domain-config-service
+          image: subhankarm2312/ts-domain-config-service
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Xms128m -Xmx256m"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8090
+          envFrom:
+            - configMapRef:
+                name: ts-domain-config-service-config
+            - secretRef:
+                name: ts-domain-config-service-secret

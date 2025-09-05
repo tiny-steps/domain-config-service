@@ -1,0 +1,174 @@
+{
+  "domainName": "cab-booking",
+  "displayName": "Cab Booking & Ride Sharing Platform",
+  "description": "On-demand transportation service with real-time ride booking and tracking",
+  "isActive": true,
+  "entities": {
+    "userRoles": [
+      {
+        "role": "RIDER",
+        "displayName": "Rider/Passenger",
+        "permissions": ["BOOK_RIDE", "VIEW_RIDE_HISTORY", "MAKE_PAYMENT", "RATE_DRIVER", "TRACK_RIDE"]
+      },
+      {
+        "role": "DRIVER",
+        "displayName": "Driver",
+        "permissions": ["ACCEPT_RIDES", "UPDATE_LOCATION", "VIEW_EARNINGS", "MANAGE_AVAILABILITY", "RATE_RIDER"]
+      },
+      {
+        "role": "ADMIN",
+        "displayName": "Fleet Administrator",
+        "permissions": ["MANAGE_DRIVERS", "MANAGE_AREAS", "VIEW_REPORTS", "SYSTEM_CONFIG", "HANDLE_DISPUTES"]
+      },
+      {
+        "role": "DISPATCHER",
+        "displayName": "Ride Dispatcher",
+        "permissions": ["ASSIGN_RIDES", "MONITOR_FLEET", "EMERGENCY_SUPPORT", "BASIC_REPORTS"]
+      }
+    ],
+    "contextType": "service_area",
+    "contextDisplayName": "Service Area/Zone",
+    "transactionType": "ride",
+    "transactionDisplayName": "Ride Booking",
+    "resourceType": "vehicle",
+    "resourceDisplayName": "Vehicle/Cab",
+    "additionalEntities": {
+      "vehicleTypes": ["Economy", "Premium", "SUV", "Luxury", "Shared", "Electric"],
+      "rideTypes": ["Instant", "Scheduled", "Shared", "Long Distance", "Airport"],
+      "paymentMethods": ["Cash", "Credit Card", "Digital Wallet", "Corporate Account"],
+      "serviceAreas": ["Downtown", "Airport", "Suburbs", "Business District", "University"]
+    }
+  },
+  "workflows": {
+    "transactionStates": [
+      {
+        "state": "REQUESTED",
+        "displayName": "Ride Requested",
+        "description": "Rider has requested a ride",
+        "nextStates": ["DRIVER_ASSIGNED", "CANCELLED"]
+      },
+      {
+        "state": "DRIVER_ASSIGNED",
+        "displayName": "Driver Assigned",
+        "description": "Driver has been assigned and is en route",
+        "nextStates": ["DRIVER_ARRIVED", "CANCELLED"]
+      },
+      {
+        "state": "DRIVER_ARRIVED",
+        "displayName": "Driver Arrived",
+        "description": "Driver has arrived at pickup location",
+        "nextStates": ["RIDE_STARTED", "CANCELLED"]
+      },
+      {
+        "state": "RIDE_STARTED",
+        "displayName": "Ride in Progress",
+        "description": "Ride has started and is in progress",
+        "nextStates": ["RIDE_COMPLETED"]
+      },
+      {
+        "state": "RIDE_COMPLETED",
+        "displayName": "Ride Completed",
+        "description": "Ride has been completed successfully",
+        "nextStates": ["PAYMENT_PENDING"]
+      },
+      {
+        "state": "PAYMENT_PENDING",
+        "displayName": "Payment Processing",
+        "description": "Payment is being processed",
+        "nextStates": ["PAYMENT_COMPLETED", "PAYMENT_FAILED"]
+      },
+      {
+        "state": "PAYMENT_COMPLETED",
+        "displayName": "Payment Completed",
+        "description": "Payment successfully processed",
+        "nextStates": []
+      },
+      {
+        "state": "PAYMENT_FAILED",
+        "displayName": "Payment Failed",
+        "description": "Payment processing failed",
+        "nextStates": ["PAYMENT_PENDING"]
+      },
+      {
+        "state": "CANCELLED",
+        "displayName": "Ride Cancelled",
+        "description": "Ride was cancelled",
+        "nextStates": []
+      }
+    ],
+    "businessRules": {
+      "maxWaitTime": "10 minutes",
+      "cancellationFeeTime": "5 minutes",
+      "maxRideDistance": "100 km",
+      "surgeMultiplier": 2.5,
+      "driverRadius": "5 km",
+      "minimumFare": 5.0,
+      "peakHours": ["07:00-09:00", "17:00-19:00"],
+      "scheduledRideAdvance": "24h"
+    },
+    "notifications": {
+      "rideRequested": {
+        "rider": true,
+        "driver": true,
+        "admin": false
+      },
+      "driverAssigned": {
+        "rider": true,
+        "driver": false,
+        "admin": false
+      },
+      "driverArrived": {
+        "rider": true,
+        "driver": false,
+        "admin": false
+      },
+      "rideCompleted": {
+        "rider": true,
+        "driver": true,
+        "admin": false
+      },
+      "emergencyAlert": {
+        "rider": true,
+        "driver": true,
+        "admin": true
+      }
+    }
+  },
+  "terminology": {
+    "userPrimary": "Rider",
+    "userSecondary": "Driver",
+    "context": "Service Area",
+    "transaction": "Ride",
+    "resource": "Vehicle",
+    "customTerms": {
+      "booking": "Ride Booking",
+      "service": "Transportation Service",
+      "provider": "Driver/Chauffeur",
+      "location": "Service Zone",
+      "payment": "Ride Fare",
+      "rating": "Driver Rating"
+    }
+  },
+  "customSettings": {
+    "requiresGPS": true,
+    "realTimeTracking": true,
+    "emergencyButton": true,
+    "shareRideLocation": true,
+    "driverBackgroundCheck": true,
+    "vehicleInspection": true,
+    "paymentRequired": true,
+    "ratingEnabled": true,
+    "tipEnabled": true,
+    "scheduledRides": true,
+    "sharedRides": true,
+    "multiLanguageSupport": ["English", "Spanish", "French", "Portuguese"],
+    "timeZone": "UTC",
+    "currency": "USD",
+    "dateFormat": "MM/dd/yyyy",
+    "timeFormat": "12h",
+    "distanceUnit": "km",
+    "fareCalculation": "time_distance",
+    "surgeEnabled": true,
+    "promoCodesEnabled": true
+  }
+}

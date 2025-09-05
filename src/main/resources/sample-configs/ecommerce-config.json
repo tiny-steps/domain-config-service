@@ -1,0 +1,160 @@
+{
+  "domainName": "ecommerce",
+  "displayName": "E-Commerce Platform",
+  "description": "Multi-vendor e-commerce marketplace with comprehensive order management",
+  "isActive": true,
+  "entities": {
+    "userRoles": [
+      {
+        "role": "CUSTOMER",
+        "displayName": "Customer",
+        "permissions": ["VIEW_PRODUCTS", "PLACE_ORDER", "VIEW_ORDER_HISTORY", "MAKE_PAYMENT", "WRITE_REVIEWS"]
+      },
+      {
+        "role": "VENDOR",
+        "displayName": "Vendor/Seller",
+        "permissions": ["MANAGE_PRODUCTS", "VIEW_ORDERS", "UPDATE_INVENTORY", "VIEW_ANALYTICS", "MANAGE_STORE"]
+      },
+      {
+        "role": "ADMIN",
+        "displayName": "Platform Administrator",
+        "permissions": ["MANAGE_USERS", "MANAGE_VENDORS", "VIEW_REPORTS", "SYSTEM_CONFIG", "MODERATE_REVIEWS"]
+      },
+      {
+        "role": "SUPPORT",
+        "displayName": "Customer Support",
+        "permissions": ["VIEW_ORDERS", "HANDLE_DISPUTES", "CUSTOMER_ASSISTANCE", "BASIC_REPORTS"]
+      }
+    ],
+    "contextType": "store",
+    "contextDisplayName": "Online Store/Shop",
+    "transactionType": "order",
+    "transactionDisplayName": "Purchase Order",
+    "resourceType": "product",
+    "resourceDisplayName": "Product Catalog",
+    "additionalEntities": {
+      "categories": ["Electronics", "Clothing", "Home & Garden", "Books", "Sports", "Beauty"],
+      "orderTypes": ["Regular", "Express", "Bulk", "Subscription"],
+      "paymentMethods": ["Credit Card", "Debit Card", "PayPal", "Digital Wallet", "Bank Transfer"],
+      "shippingMethods": ["Standard", "Express", "Overnight", "Pickup"]
+    }
+  },
+  "workflows": {
+    "transactionStates": [
+      {
+        "state": "PENDING",
+        "displayName": "Order Placed",
+        "description": "Order has been placed and awaiting payment",
+        "nextStates": ["PAID", "CANCELLED"]
+      },
+      {
+        "state": "PAID",
+        "displayName": "Payment Confirmed",
+        "description": "Payment received and verified",
+        "nextStates": ["PROCESSING", "REFUNDED"]
+      },
+      {
+        "state": "PROCESSING",
+        "displayName": "Processing",
+        "description": "Order is being prepared for shipment",
+        "nextStates": ["SHIPPED", "CANCELLED"]
+      },
+      {
+        "state": "SHIPPED",
+        "displayName": "Shipped",
+        "description": "Order has been shipped",
+        "nextStates": ["DELIVERED", "RETURNED"]
+      },
+      {
+        "state": "DELIVERED",
+        "displayName": "Delivered",
+        "description": "Order successfully delivered",
+        "nextStates": ["RETURNED"]
+      },
+      {
+        "state": "CANCELLED",
+        "displayName": "Cancelled",
+        "description": "Order cancelled",
+        "nextStates": []
+      },
+      {
+        "state": "RETURNED",
+        "displayName": "Returned",
+        "description": "Order returned by customer",
+        "nextStates": ["REFUNDED"]
+      },
+      {
+        "state": "REFUNDED",
+        "displayName": "Refunded",
+        "description": "Payment refunded to customer",
+        "nextStates": []
+      }
+    ],
+    "businessRules": {
+      "orderProcessingTime": "2-3 business days",
+      "returnPolicy": "30 days",
+      "maxOrderValue": 10000,
+      "minOrderValue": 10,
+      "freeShippingThreshold": 50,
+      "inventoryReservationTime": "30 minutes",
+      "bulkDiscountThreshold": 100
+    },
+    "notifications": {
+      "orderPlaced": {
+        "customer": true,
+        "vendor": true,
+        "admin": false
+      },
+      "orderShipped": {
+        "customer": true,
+        "vendor": false,
+        "admin": false
+      },
+      "orderDelivered": {
+        "customer": true,
+        "vendor": true,
+        "admin": false
+      },
+      "lowInventory": {
+        "customer": false,
+        "vendor": true,
+        "admin": true
+      }
+    }
+  },
+  "terminology": {
+    "userPrimary": "Customer",
+    "userSecondary": "Vendor",
+    "context": "Store",
+    "transaction": "Order",
+    "resource": "Product",
+    "customTerms": {
+      "booking": "Order Placement",
+      "service": "Product Purchase",
+      "provider": "Seller/Vendor",
+      "location": "Store/Marketplace",
+      "payment": "Purchase Payment",
+      "rating": "Product Review"
+    }
+  },
+  "customSettings": {
+    "requiresShipping": true,
+    "allowsDigitalProducts": true,
+    "inventoryTracking": true,
+    "multiVendorSupport": true,
+    "wishlistEnabled": true,
+    "compareEnabled": true,
+    "paymentRequired": true,
+    "ratingEnabled": true,
+    "reviewsEnabled": true,
+    "couponsEnabled": true,
+    "loyaltyProgram": true,
+    "multiLanguageSupport": ["English", "Spanish", "French", "German"],
+    "timeZone": "UTC",
+    "currency": "USD",
+    "dateFormat": "MM/dd/yyyy",
+    "timeFormat": "12h",
+    "taxCalculation": "automatic",
+    "shippingCalculation": "weight_based"
+  }
+}

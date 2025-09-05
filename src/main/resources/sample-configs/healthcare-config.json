@@ -1,0 +1,138 @@
+{
+  "domainName": "healthcare",
+  "displayName": "Healthcare Management System",
+  "description": "Comprehensive healthcare management platform for clinics and hospitals",
+  "isActive": true,
+  "entities": {
+    "userRoles": [
+      {
+        "role": "PATIENT",
+        "displayName": "Patient",
+        "permissions": ["VIEW_PROFILE", "BOOK_APPOINTMENT", "VIEW_MEDICAL_RECORDS", "MAKE_PAYMENT"]
+      },
+      {
+        "role": "DOCTOR",
+        "displayName": "Doctor",
+        "permissions": ["VIEW_PATIENTS", "MANAGE_APPOINTMENTS", "CREATE_PRESCRIPTIONS", "VIEW_MEDICAL_RECORDS"]
+      },
+      {
+        "role": "ADMIN",
+        "displayName": "Administrator",
+        "permissions": ["MANAGE_USERS", "MANAGE_BRANCHES", "VIEW_REPORTS", "SYSTEM_CONFIG"]
+      },
+      {
+        "role": "RECEPTIONIST",
+        "displayName": "Receptionist",
+        "permissions": ["MANAGE_APPOINTMENTS", "PATIENT_REGISTRATION", "BASIC_REPORTS"]
+      }
+    ],
+    "contextType": "branch",
+    "contextDisplayName": "Medical Branch/Clinic",
+    "transactionType": "appointment",
+    "transactionDisplayName": "Medical Appointment",
+    "resourceType": "medical_record",
+    "resourceDisplayName": "Medical Record",
+    "additionalEntities": {
+      "specializations": ["Cardiology", "Dermatology", "Pediatrics", "Orthopedics", "General Medicine"],
+      "appointmentTypes": ["Consultation", "Follow-up", "Emergency", "Routine Checkup"],
+      "paymentMethods": ["Cash", "Card", "Insurance", "Online"]
+    }
+  },
+  "workflows": {
+    "transactionStates": [
+      {
+        "state": "SCHEDULED",
+        "displayName": "Scheduled",
+        "description": "Appointment has been scheduled",
+        "nextStates": ["CONFIRMED", "CANCELLED"]
+      },
+      {
+        "state": "CONFIRMED",
+        "displayName": "Confirmed",
+        "description": "Appointment confirmed by patient",
+        "nextStates": ["IN_PROGRESS", "CANCELLED", "NO_SHOW"]
+      },
+      {
+        "state": "IN_PROGRESS",
+        "displayName": "In Progress",
+        "description": "Patient is being consulted",
+        "nextStates": ["COMPLETED"]
+      },
+      {
+        "state": "COMPLETED",
+        "displayName": "Completed",
+        "description": "Consultation completed",
+        "nextStates": []
+      },
+      {
+        "state": "CANCELLED",
+        "displayName": "Cancelled",
+        "description": "Appointment cancelled",
+        "nextStates": []
+      },
+      {
+        "state": "NO_SHOW",
+        "displayName": "No Show",
+        "description": "Patient did not show up",
+        "nextStates": []
+      }
+    ],
+    "businessRules": {
+      "bookingAdvanceTime": "24h",
+      "cancellationPolicy": "2h",
+      "maxAppointmentsPerDay": 20,
+      "workingHours": {
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "workingDays": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"]
+    },
+    "notifications": {
+      "appointmentBooked": {
+        "patient": true,
+        "doctor": true,
+        "admin": false
+      },
+      "appointmentCancelled": {
+        "patient": true,
+        "doctor": true,
+        "admin": false
+      },
+      "appointmentReminder": {
+        "patient": true,
+        "doctor": false,
+        "admin": false
+      }
+    }
+  },
+  "terminology": {
+    "userPrimary": "Patient",
+    "userSecondary": "Doctor",
+    "context": "Branch",
+    "transaction": "Appointment",
+    "resource": "Medical Record",
+    "customTerms": {
+      "booking": "Appointment Scheduling",
+      "service": "Medical Consultation",
+      "provider": "Healthcare Provider",
+      "location": "Medical Facility",
+      "payment": "Medical Bill",
+      "rating": "Doctor Rating"
+    }
+  },
+  "customSettings": {
+    "requiresInsurance": true,
+    "allowsOnlineConsultation": true,
+    "prescriptionRequired": true,
+    "medicalHistoryRequired": true,
+    "emergencyContactRequired": true,
+    "consentFormRequired": true,
+    "paymentRequired": true,
+    "ratingEnabled": true,
+    "multiLanguageSupport": ["English", "Spanish", "French"],
+    "timeZone": "UTC",
+    "currency": "USD",
+    "dateFormat": "MM/dd/yyyy",
+    "timeFormat": "12h"
+  }
+}
