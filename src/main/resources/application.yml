@@ -4,7 +4,8 @@ server:
 spring:
   application:
     name: domain-config-service
-  
+
+
   datasource:
     url: jdbc:postgresql://localhost:5432/tiny_steps_domain_config
     username: postgres
@@ -16,8 +17,8 @@ spring:
       connection-timeout: 30000
       idle-timeout: 600000
       max-lifetime: 1800000
-  
-  
+
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,7 +29,7 @@ spring:
         format_sql: true
         use_sql_comments: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  
+
   cache:
     type: caffeine
     caffeine:
@@ -39,7 +40,7 @@ spring:
       - domainsByContext
       - paymentRequiredDomains
       - domainsByTransaction
-  
+
   cloud:
     discovery:
       enabled: true
@@ -90,18 +91,18 @@ domain:
       - healthcare
       - ecommerce
       - cab-booking
-    
+
 # Custom Application Properties
 app:
   name: "Domain Configuration Service"
   version: "1.0.0"
   description: "Centralized domain configuration management for multi-domain microservices"
-  
+
 # Security Configuration (if needed)
 security:
   jwt:
     enabled: false # Disable JWT for internal service communication
-  
+
 # API Documentation
 springdoc:
   api-docs:
