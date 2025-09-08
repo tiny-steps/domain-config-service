@@ -11,37 +11,37 @@ import java.util.Optional;
 
 @Repository
 public interface DomainConfigRepository extends JpaRepository<DomainConfig, String> {
-    
+
     /**
      * Find domain configuration by domain name
      */
     Optional<DomainConfig> findByDomainNameAndIsActiveTrue(String domainName);
-    
+
     /**
      * Find all active domain configurations
      */
     List<DomainConfig> findByIsActiveTrueOrderByDomainName();
-    
+
     /**
      * Check if domain name exists
      */
     boolean existsByDomainName(String domainName);
-    
+
     /**
      * Find domain configurations by context type
      */
-    @Query("SELECT dc FROM DomainConfig dc WHERE dc.isActive = true AND JSON_EXTRACT(dc.entities, '$.context_type') = :contextType")
+    @Query(value = "SELECT * FROM domain_configs dc WHERE dc.is_active = true AND dc.entities ->> 'contextType' = :contextType", nativeQuery = true)
     List<DomainConfig> findByContextType(@Param("contextType") String contextType);
-    
+
     /**
      * Find domain configurations that require payment
      */
-    @Query("SELECT dc FROM DomainConfig dc WHERE dc.isActive = true AND JSON_EXTRACT(dc.workflows, '$.payment_required') = true")
+    @Query(value = "SELECT * FROM domain_configs dc WHERE dc.is_active = true AND (dc.custom_settings ->> 'paymentRequired')::boolean = true", nativeQuery = true)
     List<DomainConfig> findPaymentRequiredDomains();
-    
+
     /**
      * Find domain configurations by transaction type
      */
-    @Query("SELECT dc FROM DomainConfig dc WHERE dc.isActive = true AND JSON_EXTRACT(dc.entities, '$.transaction_type') = :transactionType")
+    @Query(value = "SELECT * FROM domain_configs dc WHERE dc.is_active = true AND dc.entities ->> 'transactionType' = :transactionType", nativeQuery = true)
     List<DomainConfig> findByTransactionType(@Param("transactionType") String transactionType);
 }
