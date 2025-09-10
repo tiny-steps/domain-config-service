@@ -5,9 +5,9 @@ spring:
   application:
     name: domain-config-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/tiny_steps_domain_config
+    url: jdbc:postgresql://localhost:5432/domain_config
     username: postgres
-    password: password
+    password: root
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 20
