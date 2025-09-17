@@ -6,3 +6,5 @@ data:
   SPRING_APPLICATION_NAME: "ts-domain-config-service"
   SERVER_PORT: "8090"
   EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: "http://ts-service-registry:8761/eureka"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgresql.infrastructure.svc.cluster.local:5432/domain_config_service"
+
