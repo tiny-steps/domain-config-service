@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ts-domain-config-service
-          image: subhankarm2312/ts-domain-config-service
+          image: tinystepsd3v/ts-domain-config-service
           env:
             - name: JAVA_TOOL_OPTIONS
               value: "-Xms128m -Xmx256m"

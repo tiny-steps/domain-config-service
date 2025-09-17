@@ -3,13 +3,6 @@ kind: ConfigMap
 metadata:
   name: ts-domain-config-service-config
 data:
-  SPRING_PROFILES_ACTIVE: "prod"
+  SPRING_APPLICATION_NAME: "ts-domain-config-service"
   SERVER_PORT: "8090"
   EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: "http://ts-service-registry:8761/eureka"
-  EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
-  EUREKA_INSTANCE_HOSTNAME: "ts-domain-config-service"
-  SPRING_APPLICATION_NAME: "domain-config-service"
-  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,info,metrics"
-  MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS: "always"
-  LOGGING_LEVEL_COM_TINYSTEPS: "INFO"
-  LOGGING_LEVEL_ROOT: "WARN"
